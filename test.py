@@ -24,8 +24,7 @@ def add_x(column, row):
     games.create_line(x, y + 80, x + 80, y, width=7, fill='#0000FF')
 
 
-add_x(0, 0)
-add_x(1,1)
+
 
 root.mainloop()  # Инициализируем окно
 
