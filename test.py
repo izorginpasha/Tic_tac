@@ -10,11 +10,23 @@ games.place(x=25, y=25)
 for i in range(0, 9):
     x = i // 3 * 100
     y = i % 3 * 100
-    games.create_rectangle(x, y, x +100, y + 100,
+    games.create_rectangle(x, y, x + 100, y + 100,
                            width=3,
                            outline='#A5A5A5',
-                           fill='#CCCCCC' ,
+                           fill='#CCCCCC',
                            activefill='#FFFAFA')
+
+
+def add_x(column, row):
+    x = 10 + 100 * column
+    y = 10 + 100 * row
+    games.create_line(x, y, x + 80, y + 80, width=7, fill='#0000FF')
+    games.create_line(x, y + 80, x + 80, y, width=7, fill='#0000FF')
+
+
+add_x(0, 0)
+add_x(1,1)
+
 root.mainloop()  # Инициализируем окно
 
 maps = [1, 2, 3,
@@ -31,8 +43,9 @@ victories = [[0, 1, 2],
              [0, 4, 8],
              [2, 4, 6]]
 
-
 # Вывод карты на экран
+
+
 def print_maps():
     print(maps[0], end=" ")
     print(maps[1], end=" ")
