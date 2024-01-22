@@ -1,8 +1,21 @@
-from  tkinter import *
+from tkinter import *
 
-root = Tk()
+root = Tk()  # Главное окно
 root.title("Крестики нолики")
+root.geometry('350x350')
 
+games = Canvas(root, width=300, height=300)  # Новый холст
+games.place(x=25, y=25)
+
+for i in range(0, 9):
+    x = i // 3 * 100
+    y = i % 3 * 100
+    games.create_rectangle(x, y, x +100, y + 100,
+                           width=3,
+                           outline='#A5A5A5',
+                           fill='#CCCCCC' ,
+                           activefill='#FFFAFA')
+root.mainloop()  # Инициализируем окно
 
 maps = [1, 2, 3,
         4, 5, 6,
@@ -58,12 +71,11 @@ game_over = False
 player1 = True
 count = 0
 while game_over == False:
-    if (count>8):
+    if (count > 8):
         break
 
     # 1. Показываем карту
     print_maps()
-
 
     # 2. Спросим у играющего куда делать ход
     if player1 == True:
