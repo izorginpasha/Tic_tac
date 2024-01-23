@@ -24,6 +24,18 @@ def add_x(column, row):
     games.create_line(x, y + 80, x + 80, y, width=7, fill='#0000FF')
 
 
+def add_0(column, row):
+    x = 10 + 100 * column
+    y = 10 + 100 * row
+    games.create_oval(x, y, x + 80, y + 80, width=7, outline='#FF0000')
+
+
+def click(event):
+    colum = event.x // 100
+    row = event.y // 100
+    add_x(colum, row)
+
+games.bind('<Button-1>', click)
 
 
 root.mainloop()  # Инициализируем окно
@@ -41,6 +53,7 @@ victories = [[0, 1, 2],
              [2, 5, 8],
              [0, 4, 8],
              [2, 4, 6]]
+
 
 # Вывод карты на экран
 
