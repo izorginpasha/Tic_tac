@@ -6,6 +6,22 @@ root.geometry('350x350')
 
 games = Canvas(root, width=300, height=300)  # Новый холст
 games.place(x=25, y=25)
+maps = [1, 2, 3,
+        4, 5, 6,
+        7, 8, 9]
+
+# Инициализация победных линий
+victories = [[0, 1, 2],
+             [3, 4, 5],
+             [6, 7, 8],
+             [0, 3, 6],
+             [1, 4, 7],
+             [2, 5, 8],
+             [0, 4, 8],
+             [2, 4, 6]]
+game_over = False
+player1 = True
+count = 0
 
 for i in range(0, 9):
     x = i // 3 * 100
@@ -33,43 +49,20 @@ def add_0(column, row):
 def click(event):
     colum = event.x // 100
     row = event.y // 100
-    add_x(colum, row)
+    global player1
+    if player1 == True:
+        symbol = "X"
+        step = colum + row * 3
+        add_x(colum, row)
+        step_maps(step, symbol)
+        player1 = FALSE
 
-games.bind('<Button-1>', click)
-
-
-root.mainloop()  # Инициализируем окно
-
-maps = [1, 2, 3,
-        4, 5, 6,
-        7, 8, 9]
-
-# Инициализация победных линий
-victories = [[0, 1, 2],
-             [3, 4, 5],
-             [6, 7, 8],
-             [0, 3, 6],
-             [1, 4, 7],
-             [2, 5, 8],
-             [0, 4, 8],
-             [2, 4, 6]]
-
-
-# Вывод карты на экран
-
-
-def print_maps():
-    print(maps[0], end=" ")
-    print(maps[1], end=" ")
-    print(maps[2])
-
-    print(maps[3], end=" ")
-    print(maps[4], end=" ")
-    print(maps[5])
-
-    print(maps[6], end=" ")
-    print(maps[7], end=" ")
-    print(maps[8])
+    else:
+        symbol = "O"
+        step = colum + row * 3
+        add_0(colum, row)
+        step_maps(step, symbol)
+        player1 = TRUE
 
 
 # Сделать ход в ячейку
@@ -92,34 +85,33 @@ def get_result():
 
 
 # Основная программа
-game_over = False
-player1 = True
-count = 0
+
 while game_over == False:
     if (count > 8):
         break
 
     # 1. Показываем карту
-    print_maps()
+
+    # Инициализируем окно
 
     # 2. Спросим у играющего куда делать ход
-    if player1 == True:
-        symbol = "X"
-        step = int(input("Человек 1, ваш ход: "))
-    else:
-        symbol = "O"
-        step = int(input("Человек 2, ваш ход: "))
+    # if player1 == True:
+    #     symbol = "X"
+    #     step = int(input("Человек 1, ваш ход: "))
+    # else:
+    #     symbol = "O"
+    #     step = int(input("Человек 2, ваш ход: "))
 
-    step_maps(step, symbol)  # делаем ход в указанную ячейку
+    # step_maps(step, symbol)  # делаем ход в указанную ячейку
     win = get_result()  # определим победителя
     if win != "":
         game_over = True
     else:
         game_over = False
     count += 1
-
-    player1 = not (player1)
+    games.bind('<Button-1>', click)
+    root.mainloop()
 
 # Игра окончена. Покажем карту. Объявим победителя.
-print_maps()
+# print_maps()
 print("Победил", win or "ничья")
