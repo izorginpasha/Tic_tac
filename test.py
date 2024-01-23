@@ -64,6 +64,7 @@ def click(event):
             add_x(colum, row)
             step_maps(step, symbol)
             player1 = FALSE
+            count += 1
 
     else:
         symbol = "O"
@@ -72,8 +73,9 @@ def click(event):
             add_0(colum, row)
             step_maps(step, symbol)
             player1 = TRUE
+            count += 1
     win = get_result()  # определим победителя
-    count += 1
+
 
 
 # Сделать ход в ячейку
