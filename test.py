@@ -22,7 +22,7 @@ player1 = True
 count = 0
 win = ""
 
-for i in range(0, 9):
+for i in range(0, 9):  # отрисовка квадратов
     x = i // 3 * 100
     y = i % 3 * 100
     games.create_rectangle(x, y, x + 100, y + 100,
@@ -54,7 +54,7 @@ def click(event):
     global maps
     if (count > 7):
         win = "ничья"
-        return   end_game()
+        return end_game()
 
     if player1 == True:
         symbol = "X"
@@ -77,16 +77,18 @@ def click(event):
     win = get_result()  # определим победителя
 
 
-
 # Сделать ход в ячейку
 def step_maps(step, symbol):
     maps[step] = symbol
 
 
-def end_game():
-    root.destroy()
+def end_game():  # Закрытие игры
+    # root.destroy()
+    games.delete("all")
+    games.create_text(100, 100,
+                      text='Победил ' + win,
+                      justify=CENTER, font="Verdana 14")
     print("Победил", win)
-
 
 
 # Получить текущий результат игры
