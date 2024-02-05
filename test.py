@@ -77,7 +77,7 @@ def click(event):
     win = get_result()  # определим победителя
 
 
-# Сделать ход в ячейку
+# Сделать ход в ячейку 1
 def step_maps(step, symbol):
     maps[step] = symbol
 
